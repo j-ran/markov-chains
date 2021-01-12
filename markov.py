@@ -52,7 +52,7 @@ def make_chains(text_string):
         # make tuples in our empty dict.
         
     # looping over every two word pair in the text
-    for i in range(len(words) - 1):
+    for i in range(len(words) - 2):
         key = (words[i], words[i + 1])
         value = words[i + 2]
 
@@ -65,9 +65,10 @@ def make_chains(text_string):
         # add value to existing key
         chains[key].append(value)    
 
-#    print(chains)
+#   print(chains)
+    return chains
 
-print(make_chains('green-eggs.txt'))
+# make_chains('green-eggs.txt')
 
 
 
