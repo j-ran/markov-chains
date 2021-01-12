@@ -11,8 +11,9 @@ def open_and_read_file(file_path):
 
     # open the file
     # read the entire contents
-    contents = open(file_path).read()
-
+    file_text = open(file_path)
+    contents = file_text.read()
+    file_text.close()
     return contents
 
 #print(open_and_read_file('green-eggs.txt'))
@@ -48,16 +49,16 @@ def make_chains(text_string):
     # take the out put from the pre. func. (prob don't need)
     # split the words 
     words = text_string.split()
+
+    # to set a stop point    
+    words.append(None)
+
     # loop through the words
-        # make tuples in our empty dict.
-        
+    # make tuples in our empty dict.
     # looping over every two word pair in the text
     for i in range(len(words) - 2):
         key = (words[i], words[i + 1])
         value = words[i + 2]
-
-#at this moment, having an Index Error at line 57
-#just an idea: while (i + 1) is < range(len(words) - 1)
 
         #if key is in dictionary already, 
         if key not in chains:
@@ -75,10 +76,26 @@ def make_chains(text_string):
 def make_text(chains):
     """Return text from chains."""
 
-    words = []
+    # Make a new key out of the second word in the first key 
+    # and the random word you pulled out from the list of words that followed it.
+    # Look up that new key in the dictionary, 
+    # and pull a new random word out of the new list.
+    # Keep doing that until your program raises a KeyError.
 
-    # your code goes here
 
+    
+    key = choice(list(chains.keys()))
+    words = [key[0], key[1]] # keys from the dict.
+    word = choice(chains[key])
+
+# make a new key from the last item of the previous key
+# and stop when one of the keys is None
+    while word is not None:
+        key = (key[1], word)
+        words.append(word)
+        word = choice(chains[key])
+
+# return the result as a string of words
     return ' '.join(words)
 
 
