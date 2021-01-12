@@ -2,7 +2,6 @@
 
 from random import choice
 
-
 def open_and_read_file(file_path):
     """Take file path as string; return text as string.
 
@@ -10,10 +9,13 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
+    # open the file
+    # read the entire contents
+    contents = open(file_path).read()
 
-    return 'Contents of your file as one long string'
+    return contents
 
+#print(open_and_read_file('green-eggs.txt'))
 
 def make_chains(text_string):
     """Take input text as string; return dictionary of Markov chains.
@@ -40,11 +42,33 @@ def make_chains(text_string):
         [None]
     """
 
+
     chains = {}
+ 
+    # take the out put from the pre. func. (prob don't need)
+    # split the words 
+    words = text_string.split()
+    # loop through the words
+        # make tuples in our empty dict.
+        
+    # looping over every two word pair in the text
+    for i in range(len(words) - 1):
+        key = (words[i], words[i + 1])
+        value = words[i + 2]
 
-    # your code goes here
+#at this moment, having an Index Error at line 57
+#just an idea: while (i + 1) is < range(len(words) - 1)
 
-    return chains
+        #if key is in dictionary already, 
+        if key not in chains:
+            chains[key] = []
+        # add value to existing key
+        chains[key].append(value)    
+
+#    print(chains)
+
+print(make_chains('green-eggs.txt'))
+
 
 
 def make_text(chains):
@@ -69,3 +93,8 @@ chains = make_chains(input_text)
 random_text = make_text(chains)
 
 print(random_text)
+
+
+
+#question: do we need to close the  text file?
+#    contents.close(file_path)
